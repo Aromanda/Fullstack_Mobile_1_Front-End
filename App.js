@@ -1,12 +1,20 @@
+import React from 'react';
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
+import Login from './components/screen/login'; // Import the Login component from the new file
+
+// export default function App() {
+//   return (
+//     <View style={styles.container}>
+//       <Login /> {/* Use the Login component here */}
+//       <StatusBar style="auto" />
+//     </View>
+//   );
+// }
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <Login />
   );
 }
 
