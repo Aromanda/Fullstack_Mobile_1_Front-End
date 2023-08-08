@@ -1,16 +1,37 @@
-import React, { useState } from 'react';
-import { StyleSheet, Text, View, TextInput, TouchableOpacity, Image, KeyboardAvoidingView, Platform } from 'react-native';
+import React, { useState, useContext } from 'react';
+import { StyleSheet, Text, View, TextInput, TouchableOpacity, Image, KeyboardAvoidingView, Platform, Alert } from 'react-native';
+import { UserContext } from './shared/userContext'
 
-const Login = () => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+const Login = ({ navigation }) => {
+  const [email, setEmail] = useState('erica.ger@gmail.com');
+  const [password, setPassword] = useState('password');
+  const { setUser } = useContext(UserContext);
 
   const handleLogin = () => {
-    // Add your login logic here (e.g., authenticate the user with backend)
-    // For simplicity, this example just logs the entered email and password.
-    console.log('Email:', email);
-    console.log('Password:', password);
+    console.log("email", email, "password", password);
+    fetch(`${process.env.EXPO_PUBLIC_NGROK_URL}/api/login`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ email, password }),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.success) {
+          Alert.alert('Login Successful!', 'You are now logged in.');
+          setUser(data.user); // Save the user data to context
+          navigation.navigate('RestaurantsMenu'); // Navigate to RestaurantsMenu screen
+        } else {
+          Alert.alert('Login Failed!', 'Please check your credentials and try again.');
+        }
+      })
+      .catch((error) => {
+        Alert.alert('Login Failed!', 'An error occurred during login.');
+        console.error('Login failed:', error);
+      });
   };
+
 
   return (
     <KeyboardAvoidingView

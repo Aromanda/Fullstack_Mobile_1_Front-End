@@ -1,28 +1,24 @@
 import React from 'react';
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, View } from 'react-native';
-import Login from './components/screen/login'; // Import the Login component from the new file
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+import { UserProvider } from './components/screen/shared/userContext';
+import Login from './components/screen/login';
+import RestaurantsMenu from './components/screen/restaurantsmenu';
 
-// export default function App() {
-//   return (
-//     <View style={styles.container}>
-//       <Login /> {/* Use the Login component here */}
-//       <StatusBar style="auto" />
-//     </View>
-//   );
-// }
+const Stack = createStackNavigator();
 
-export default function App() {
+const App = () => {
   return (
-    <Login />
+    <UserProvider>
+      <NavigationContainer>
+        <Stack.Navigator initialRouteName="Login">
+          <Stack.Screen name="Login" component={Login} />
+          <Stack.Screen name="RestaurantsMenu" component={RestaurantsMenu} />
+        </Stack.Navigator>
+      </NavigationContainer>
+    </UserProvider>
   );
-}
+};
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+export default App;
+
