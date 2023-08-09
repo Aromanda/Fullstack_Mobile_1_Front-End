@@ -1,9 +1,9 @@
 import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-import { UserProvider } from './components/screen/shared/userContext';
+import { UserProvider } from './components/screen/shared/usercontexts';
 import Login from './components/screen/login';
-import RestaurantsMenu from './components/screen/restaurantsmenu';
+import Restaurants from './components/screen/restaurants';
 
 const Stack = createStackNavigator();
 
@@ -13,7 +13,7 @@ const App = () => {
       <NavigationContainer>
         <Stack.Navigator initialRouteName="Login">
           <Stack.Screen name="Login" component={Login} />
-          <Stack.Screen name="RestaurantsMenu" component={RestaurantsMenu} />
+          <Stack.Screen name="Restaurants" component={Restaurants} />
         </Stack.Navigator>
       </NavigationContainer>
     </UserProvider>

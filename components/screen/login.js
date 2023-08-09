@@ -1,6 +1,6 @@
 import React, { useState, useContext } from 'react';
 import { StyleSheet, Text, View, TextInput, TouchableOpacity, Image, KeyboardAvoidingView, Platform, Alert } from 'react-native';
-import { UserContext } from './shared/userContext'
+import { UserContext } from './shared/usercontexts'
 
 const Login = ({ navigation }) => {
   const [email, setEmail] = useState('erica.ger@gmail.com');
@@ -21,7 +21,7 @@ const Login = ({ navigation }) => {
         if (data.success) {
           Alert.alert('Login Successful!', 'You are now logged in.');
           setUser(data.user); // Save the user data to context
-          navigation.navigate('RestaurantsMenu'); // Navigate to RestaurantsMenu screen
+          navigation.navigate('Restaurants'); // Navigate to RestaurantsMenu screen
         } else {
           Alert.alert('Login Failed!', 'Please check your credentials and try again.');
         }
